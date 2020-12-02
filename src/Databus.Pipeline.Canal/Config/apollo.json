@@ -1,0 +1,15 @@
+﻿{
+  "apollo": {
+    "AppId": "fbg-hwb-canal-pipeline",
+    "Cluster": "default",
+    "Env": "${APOLLO_ENV}",
+    "Meta": {
+      "DEV": "http://dev.apollo-configservice.service.consul:8080",
+      "FAT": "http://test.apollo-configservice.service.consul:8080",
+      "UAT": "http://sbx.apollo-configservice.service.consul:8080",
+      "PRO": "http://apollo.cn-shenzhen-internal.goodcang.net:8080"
+    }
+    //直接指定Applo服务地址，不需要通过环境变量切换时使用
+    //"MetaServer": "http://${Environment|L}-apollo.eminxing.com"
+  }
+}

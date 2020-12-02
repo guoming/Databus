@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Databus.Pipeline.Canal", "src\Databus.Pipeline.Canal\Databus.Pipeline.Canal.csproj", "{0B450F3A-AFB6-4A02-9459-CF549AF831BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B450F3A-AFB6-4A02-9459-CF549AF831BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B450F3A-AFB6-4A02-9459-CF549AF831BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B450F3A-AFB6-4A02-9459-CF549AF831BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B450F3A-AFB6-4A02-9459-CF549AF831BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {66D52499-40AF-411E-ABD7-DDA8D13CF492}
+	EndGlobalSection
+EndGlobal

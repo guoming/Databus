@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Databus.Pipeline.Canal</RootNamespace>
+    <AssemblyName>Databus.Pipeline-Canal</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Com.Ctrip.Framework.Apollo" Version="2.4.2" />
+    <PackageReference Include="Com.Ctrip.Framework.Apollo.Configuration" Version="2.4.1" />
+    <PackageReference Include="DumpExtensions" Version="2.0.0" />
+    <PackageReference Include="Hummingbird.AspNetCore.HealthChecks" Version="1.15.0" />
+    <PackageReference Include="Hummingbird.AspNetCore.Metrics" Version="1.0.0" />
+    <PackageReference Include="Hummingbird.Extensions.Configuration.Json" Version="1.15.0" />
+    <PackageReference Include="Hummingbird.Extensions.DynamicRoute.Consul" Version="1.15.7" />
+    <PackageReference Include="Hummingbird.Extensions.EventBus" Version="1.15.0" />
+    <PackageReference Include="Hummingbird.Extensions.EventBus.Kafka" Version="1.15.19" />
+    <PackageReference Include="Hummingbird.Extensions.HealthChecks" Version="1.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Config\apollo.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Config\appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties config_4appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>
