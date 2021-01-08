@@ -4,7 +4,7 @@
       "commandName": "Project",
       "commandLineArgs": "--urls http://0.0.0.0:9991",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "test"
+        "ASPNETCORE_ENVIRONMENT": "dev"
       }
     }
   }

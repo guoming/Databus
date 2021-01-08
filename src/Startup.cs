@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace Databus.Pipeline.Canal
+namespace CanalTopicExchange
 {
     public class Startup
     {

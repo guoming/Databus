@@ -11,8 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.Extensions.Logging;
+using Consul;
 
-namespace Databus.Pipeline.Canal
+namespace CanalTopicExchange
 {
     public class CanalEventEntry
     {
@@ -54,6 +55,7 @@ namespace Databus.Pipeline.Canal
 
             public Output[] output { get; set; }
 
+
             public class Input
             {
                 public string topic { get; set; }
@@ -66,6 +68,42 @@ namespace Databus.Pipeline.Canal
                 public string[] tableInclude { get; set; }
 
                 public string topic { get; set; }
+
+                public Dictionary<string,Mapping[]> mapping { get; set; }
+            }
+
+            public class Mapping
+            {
+                public string pattern { get; set; }
+
+                public string replacement { get; set; }
+
+                public Dictionary<string, Mapping[]> mapping { get; set; }
+
+                public string Replace(string input)
+                {
+                    return Regex.Replace(input, this.replacement);
+                }
+
+                public bool IsMatch(string input)
+                {
+                    return Regex.IsMatch(input);
+                }
+
+                private System.Text.RegularExpressions.Regex _regex;
+                public System.Text.RegularExpressions.Regex Regex
+                {
+                    get
+                    {
+                        if (_regex == null)
+                        {
+                            _regex = new System.Text.RegularExpressions.Regex(pattern);
+                        }
+                    
+                        return _regex;
+                    }
+                }
+
             }
         }
 
@@ -103,16 +141,48 @@ namespace Databus.Pipeline.Canal
                     var @event = @events[i];
                     var topic = Headers[i]["x-topic"];
                     var router = databus.Routers.FirstOrDefault(a => topic == a.input.topic);
+                    var srcTopic = router.input.topic;
 
-                    foreach (var rule in router.output)
+                    foreach (var outputRule in router.output)
                     {
-                        if ((rule.dbInclude == null || !rule.dbInclude.Any() && rule.dbInclude.Any(a => @event.database.StartsWith(a)))
-                            && (rule.tableInclude == null || !rule.tableInclude.Any() && rule.tableInclude.Any(a => @event.table.StartsWith(a))))
+                        if ((outputRule.dbInclude == null || !outputRule.dbInclude.Any() && outputRule.dbInclude.Any(a => @event.database.StartsWith(a)))
+                            && (outputRule.tableInclude == null || !outputRule.tableInclude.Any() && outputRule.tableInclude.Any(a => @event.table.StartsWith(a))))
                         {
-                            var destTopic = rule.topic;
-                            var srcTopic = router.input.topic;
-                            destTopic = destTopic.Replace("{database}", @event.database);
-                            destTopic = destTopic.Replace("{table}", @event.table);
+                            var destTopic = outputRule.topic;
+                            var database = @event.database;
+                            var table = @event.table;
+                        
+                            if(outputRule.mapping.ContainsKey("database"))
+                            {
+                                var mappings = outputRule.mapping["database"];
+
+                                foreach (var p in mappings)
+                                {
+                                    if (p.IsMatch(@event.database))
+                                    {
+                                        database = p.Replace(@event.database);  
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (outputRule.mapping.ContainsKey("table"))
+                            {
+                                var mappings = outputRule.mapping["table"];
+
+                                foreach (var p in mappings)
+                                {
+                                    if (p.IsMatch(@event.table))
+                                    {
+                                        table = p.Replace(@event.table);
+                                        break;
+                                    }
+                                }
+                            }
+
+
+                            destTopic = destTopic.Replace("{database}", database);
+                            destTopic = destTopic.Replace("{table}", table);
 
                             logger.LogInformation($"{srcTopic}>{destTopic}");
 

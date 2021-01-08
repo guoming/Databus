@@ -1,6 +1,6 @@
 ﻿{
   "apollo": {
-    "AppId": "fbg-hwb-canal-pipeline",
+    "AppId": "fbg-dwh-canal-exchange",
     "Cluster": "default",
     "Env": "${APOLLO_ENV}",
     "Meta": {

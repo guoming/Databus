@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Databus.Pipeline.Canal
+namespace CanalTopicExchange
 {
     public class Program
     {
