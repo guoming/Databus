@@ -1,4 +1,5 @@
 ﻿using Hummingbird.Extensions.EventBus.Abstractions;
+using Hummingbird.Extensions.HealthChecks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,12 @@ namespace CanalTopicExchange
                     {
                         checks.WithDefaultCacheDuration(TimeSpan.FromSeconds(5));
                         checks.WithPartialSuccessStatus(Hummingbird.Extensions.HealthChecks.CheckStatus.Healthy);
+                        checks.AddKafkaCheck("kafka",new Confluent.Kafka.ProducerConfig()
+                        {
+                            EnableDeliveryReports = true,
+                            BootstrapServers = Configuration["Kafka:Sender:bootstrap.servers"],
+                            //  Debug = hostContext.Configuration["Kafka:Sender:Debug"] //  Debug = "broker,topic,msg"
+                        });
                     })
                   .AddHummingbird(hummingbird =>
                   {

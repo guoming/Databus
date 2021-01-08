@@ -22,6 +22,7 @@
     <PackageReference Include="Hummingbird.Extensions.EventBus" Version="1.15.0" />
     <PackageReference Include="Hummingbird.Extensions.EventBus.Kafka" Version="1.15.19" />
     <PackageReference Include="Hummingbird.Extensions.HealthChecks" Version="1.15.0" />
+    <PackageReference Include="Hummingbird.Extensions.HealthChecks.Kafka" Version="1.15.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
